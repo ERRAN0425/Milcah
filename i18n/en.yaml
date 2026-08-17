@@ -1,0 +1,26 @@
+featured:
+  other: Featured
+pageNotFound:
+  other: Page not found
+ongoing:
+  other: Ongoing
+sentenceSeparator:
+  other: ". "
+languageSwitcher:
+  other: Select language
+menuToggle:
+  other: Toggle navigation menu
+home:
+  other: Home
+mail:
+  other: Email
+linkedin:
+  other: LinkedIn
+instagram:
+  other: Instagram
+comingSoonTitle:
+  other: Coming soon
+comingSoonMessage:
+  other: As Mijia herself has declined to cooperate, this feature is awaiting further development. Please stay tuned.
+close:
+  other: Close

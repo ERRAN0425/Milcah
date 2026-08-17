@@ -1,0 +1,9 @@
+{{ $sideScaling := "x" }}
+
+{{ if gt .width .height }}
+    {{ $sideScaling = add .length $sideScaling }}
+{{ else }}
+    {{ $sideScaling = add $sideScaling .length }}
+{{ end }}
+
+{{ return $sideScaling }}

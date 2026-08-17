@@ -1,0 +1,36 @@
+<article class="item item--standalone{{ if page.IsHome }} item--standalone--home{{ end }}">
+    {{ $thumb := "" }}
+    {{ $style := "" }}
+
+    {{ with .Params.hero }}
+        {{ $thumb = . }}
+    {{ else }}
+        {{ warnf (add "Item: " .Params.title " has no hero" ) }}
+    {{ end }}
+
+    {{ with $thumb }}
+        {{ $image := resources.Get . }}
+        {{ with $image }}
+            {{ $fullResized := partial "fn/ResizeSmart" (dict "image" . "length" 3000) }}
+            {{ $style = add "aspect-ratio: " (printf "%.3f" (div (float .Width) .Height)) }}
+
+            <a
+                class="item__link item--standalone__link"
+                style="{{ safe.CSS $style }}"
+                href="{{ $fullResized.RelPermalink }}"
+                data-pswp-width="{{ $fullResized.Width }}"
+                data-pswp-height="{{ $fullResized.Height }}">
+
+                {{ $thumbResized := partial "fn/ResizeSmart" (dict "image" . "length" 1000) }}
+
+                <img
+                    class="item__img item--standalone__img{{ if $.Params.outline }} outlined{{ end }}"
+                    loading="lazy"
+                    src="{{ $thumbResized.RelPermalink }}"
+                    alt="{{ $.Title }}" />
+            </a>
+        {{ else }}
+            {{ errorf (add "Item: unable to find " .) }}
+        {{ end }}
+    {{ end }}
+</article>

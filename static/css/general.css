@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+
+  font-family: var(--font-family-base);
+  line-height: 1.5;
+  font-weight: 420;
+
+  /* flex footer to bottom */
+  /* https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b */
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 0;
+}
+
+footer {
+  padding-bottom: var(--spacing-small);
+}
+
+
+/* || TEXT */
+
+p {
+  margin-top: var(--spacing-p);
+  margin-bottom: var(--spacing-p);
+}
+
+p, li {
+  font-size: var(--font-size-body);
+  color: var(--color-text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-top: var(--spacing-section);
+  margin-bottom: var(--spacing-section);
+  color: var(--color-text-primary);
+  font-weight: bold;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  text-align: center;
+  margin-top: var(--spacing-p);
+  font-family: var(--font-family-special);
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+a {
+  color: var(--color-text-primary);
+  text-decoration-line: none;
+}
+
+blockquote {
+  font-style: italic;
+}
+
+sup {
+  vertical-align: top;
+}
+
+
+/* || MEDIA */
+
+figure {
+  margin: 0;
+  margin-top: var(--spacing-p);
+  margin-bottom: var(--spacing-p);
+  border-radius: var(--corner-radius);
+}
+
+figure:has(a), figure:has(img) {
+  width: auto;
+  display: grid; /* for some reason needed to avoid empty space below img */
+}
+
+
+/* || DECORATION */
+
+li::marker {
+  color: var(--color-decoration);
+}
+
+ul > li::marker {
+  font-size: smaller;
+}
+
+hr {
+  box-sizing: border-box;
+  border: 0 none transparent;
+  border-top: var(--width-border-large) solid var(--color-decoration);
+  border-radius: 0.1em;
+
+  max-width: var(--width-column-narrow);
+  margin-top: var(--spacing-p);
+  margin-bottom: var(--spacing-p);
+}

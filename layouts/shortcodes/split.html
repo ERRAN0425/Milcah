@@ -1,0 +1,25 @@
+{{ $style := "" }}
+
+{{ with .Get "widths" }}
+    {{ $widthArr := split . " " }}
+    {{ $widthAcc := 0 }}
+    {{ $gridTemplateColumns := "" }}
+
+    {{ range $widthArr }}
+        {{ $width := int . }}
+        {{ $widthAcc = add $widthAcc $width }}
+        {{ $gridTemplateColumns = add $gridTemplateColumns " " (string $width) "fr" }}
+    {{ end }}
+
+    <!-- calculate and add implicit widths -->
+    {{ if lt $widthAcc 6 }}
+        {{ $diff := sub 6 $widthAcc }}
+        {{ $gridTemplateColumns = add $gridTemplateColumns " " (string $diff) "fr" }}
+    {{ end }}
+
+    {{ $style = add "grid-template-columns: " $gridTemplateColumns }}
+{{ end }}
+
+<div class="split{{ if .Get "section" }}{{ " split--section" }}{{ end }}" style="{{ $style }}">
+    {{ .Inner }}
+</div>

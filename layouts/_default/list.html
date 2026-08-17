@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+    {{ partial "hero" . }}
+
+    <main class="column">
+        <section>
+            {{ if not .Params.hero }}
+                <h1>{{ .Title }}</h1>
+            {{ end }}
+
+            {{ .Content }}
+
+            {{ $pagesAndImages := partial "fn/GetItemsRecursive" . }}
+            {{ $pages := index $pagesAndImages 0 }}
+            {{ $images := index $pagesAndImages 1 }}
+
+            <!-- pages -->
+            {{ with $pages }}
+                {{ partial "list/stack_project" . }}
+            {{ end }}
+
+            {{ if and $pages $images }}
+                <hr />
+            {{ end }}
+
+            <!-- images -->
+            {{ with $images }}
+                {{ partial "list/stack_standalone" . }}
+            {{ end }}
+
+            <!-- homepage featured -->
+            {{ if page.IsHome }}
+                {{ $featured := where .RegularPagesRecursive "Params.featured" true }}
+                {{ with $featured }}
+                    <h2>{{ i18n "featured" }}</h2>
+                    {{ partial "list/stack_standalone" . }}
+                {{ end }}
+            {{ end }}
+        </section>
+    </main>
+
+{{ end }}

@@ -1,0 +1,14 @@
+{{ $fullResized := partial "fn/ResizeSmart" (dict "image" .src "length" 3000) }}
+
+{{ if ne .zoomable false }}
+    <a
+        class="figure__link"
+        href="{{ $fullResized.RelPermalink }}"
+        data-pswp-width="{{ $fullResized.Width }}"
+        data-pswp-height="{{ $fullResized.Height }}">
+
+        {{ partial "single/image_figure_simple" (dict "src" .src "alt" .alt "title" .title "outline" .outline) }}
+    </a>
+{{ else }}
+    {{ partial "single/image_figure_simple" (dict "src" .src "alt" .alt "title" .title "outline" .outline) }}
+{{ end }}

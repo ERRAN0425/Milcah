@@ -1,0 +1,28 @@
+{{ $time := .time }}
+{{ $includeYear := .includeYear }}
+{{ $lang := site.Language.Lang }}
+{{ $month := $time | time.Format "1" }}
+{{ $year := $time | time.Format "2006" }}
+{{ $formatted := "" }}
+
+{{ if eq $lang "zh" }}
+    {{ if $includeYear }}
+        {{ $formatted = printf "%s年%s月" $year $month }}
+    {{ else }}
+        {{ $formatted = printf "%s月" $month }}
+    {{ end }}
+{{ else if eq $lang "ko" }}
+    {{ if $includeYear }}
+        {{ $formatted = printf "%s년 %s월" $year $month }}
+    {{ else }}
+        {{ $formatted = printf "%s월" $month }}
+    {{ end }}
+{{ else }}
+    {{ if $includeYear }}
+        {{ $formatted = $time | time.Format "Jan 2006" }}
+    {{ else }}
+        {{ $formatted = $time | time.Format "Jan" }}
+    {{ end }}
+{{ end }}
+
+{{ return $formatted }}

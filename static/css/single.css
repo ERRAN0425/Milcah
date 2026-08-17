@@ -1,0 +1,123 @@
+/* || HERO */
+
+.hero {
+  position: relative;
+  width: auto;
+  max-width: 100%;
+  overflow: hidden;
+  height: var(--height-hero);
+  min-height: 16rem;
+  margin-top: calc(-1 * var(--height-header));
+}
+
+.hero--large {
+  height: var(--height-hero-large);
+}
+
+.hero__img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-overlay);
+  align-content: center;
+}
+
+.hero__title {
+  width: fit-content;
+  margin-top: calc(0.5 * var(--height-header));
+  margin-bottom: 0;
+  text-align: center;
+  font-size: var(--font-size-h1-hero);
+}
+
+.hero__title--logo {
+  font-size: var(--font-size-h1-logo);
+  height: var(--height-logo-home);
+  white-space: nowrap;
+  letter-spacing: 0.08em;
+}
+
+.hero-detail {
+  width: fit-content;
+  margin: auto;
+}
+
+.hero-detail__img {
+  max-width: calc(100vw - 2 * var(--spacing-small));
+  max-height: calc(100vh - var(--height-header) - var(--spacing-small));
+  margin-bottom: var(--spacing-small);
+  margin-left: var(--spacing-small);
+  margin-right: var(--spacing-small);
+  border-radius: var(--corner-radius);
+}
+
+
+/* || CALLOUT */
+
+.callout {
+  border-radius: var(--corner-radius);
+  padding: var(--spacing-small);
+  background-color: var(--color-surface);
+  margin-top: var(--spacing-p);
+  margin-bottom: var(--spacing-p);
+}
+
+.callout__heading {
+  color: var(--color-text-secondary);
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+.callout__body {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+
+/* || FIGURE */
+
+.figure__img {
+  max-width: 100%;
+  max-height: 99vh;
+  object-fit: cover;
+  border-radius: var(--corner-radius);
+  transition: var(--transition);
+}
+
+
+/* || SPLIT */
+
+.split {
+  height: fit-content;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: start;
+  gap: var(--spacing-edge);
+  margin-top: var(--spacing-p);
+  margin-bottom: var(--spacing-p);
+}
+
+.split--section {
+  margin-top: var(--spacing-section);
+  margin-bottom: var(--spacing-section);
+}
+
+.split > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 42rem) {
+  .split {
+    grid-auto-flow: row;
+    grid-template-columns: auto !important;
+  }
+}

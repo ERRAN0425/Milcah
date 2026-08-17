@@ -1,0 +1,11 @@
+{{ with resources.Get .Destination }}
+    <figure>
+        {{ partial "single/image_figure" (dict "src" . "title" $.Title ) }}
+
+        {{ with $.Text }}
+            <figcaption>
+                <p class="caption">{{ safe.HTML . }}</p>
+            </figcaption>
+        {{ end }}
+    </figure>
+{{ end }}

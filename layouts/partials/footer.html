@@ -1,0 +1,26 @@
+<footer>
+    <div class="footer__content column">
+        {{ with resources.Get "images/decoration-cat.png" }}
+            {{ $resized := partial "fn/ResizeSmart" (dict "image" . "length" 500) }}
+
+            <img class="footer__decoration" src="{{ $resized.RelPermalink }}" />
+        {{ end }}
+
+        <div class="footer__socials">
+            {{ range site.Data.social }}
+                {{ partial "social" (dict "icon" .icon "link" .link "label" (i18n .icon)) }}
+            {{ end }}
+        </div>
+
+        <p class="footer__text">© {{ .Site.Title }}</p>
+    </div>
+
+    <dialog class="placeholder-dialog" data-placeholder-dialog aria-labelledby="placeholder-dialog-title">
+        <form method="dialog" class="placeholder-dialog__content">
+            <button class="placeholder-dialog__close" value="close" aria-label="{{ i18n "close" }}">×</button>
+            <h2 id="placeholder-dialog-title">{{ i18n "comingSoonTitle" }}</h2>
+            <p>{{ i18n "comingSoonMessage" }}</p>
+            <button class="button button--primary" value="close">{{ i18n "close" }}</button>
+        </form>
+    </dialog>
+</footer>

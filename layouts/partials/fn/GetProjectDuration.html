@@ -1,0 +1,50 @@
+{{ $s := "" }}
+{{ $start := .start }}
+{{ $end := .end }}
+
+{{ with $start }}
+    {{ $startYear := . | time.Format "2006" }}
+    {{ $startTime := partial "fn/FormatProjectDate" (dict "time" . "includeYear" true) }}
+
+    <!-- completed -->
+    {{ if $end }}
+        {{ $endYear := $end | time.Format "2006" }}
+        {{ $endTime := partial "fn/FormatProjectDate" (dict "time" $end "includeYear" true) }}
+
+        <!-- same month -->
+        {{ if eq $startTime $endTime }}
+            {{ $s = $startTime }}
+
+        {{ else }}
+            <!-- same year, different months -->
+            {{ if eq $startYear $endYear }}
+                {{ if eq site.Language.Lang "en" }}
+                    {{ $startTime = partial "fn/FormatProjectDate" (dict "time" . "includeYear" false) }}
+                {{ else }}
+                    {{ $endTime = partial "fn/FormatProjectDate" (dict "time" $end "includeYear" false) }}
+                {{ end }}
+
+            <!-- different years -->
+            {{ else }}
+                <!-- for some reason doesn't work for future dates -->
+                {{ $startTime = partial "fn/FormatProjectDate" (dict "time" . "includeYear" true) }}
+            {{ end }}
+
+            {{ $s = delimit (slice $startTime $endTime) " – " }}
+        {{ end }}
+
+    <!-- ongoing -->
+    {{ else }}
+        {{ $s = delimit (slice $startTime (i18n "ongoing")) " – " }}
+    {{ end }}
+
+<!-- no start date -->
+{{ else }}
+    {{ with $end }}
+        {{ $endTime := partial "fn/FormatProjectDate" (dict "time" . "includeYear" true) }}
+        {{ $s = $endTime }}
+        {{ warnf "Project end without start" }}
+    {{ end }}
+{{ end }}
+
+{{ return $s }}

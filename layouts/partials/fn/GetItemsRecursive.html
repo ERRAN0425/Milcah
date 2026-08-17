@@ -1,0 +1,22 @@
+{{ $pages := (slice) }}
+{{ $images := (slice) }}
+
+{{ range where .Sections "Params.hidden" "!=" true }}
+    {{ if .Params.embed }}
+        {{ $pagesAndImages := partial "fn/GetItemsRecursive" . }}
+        {{ $pages = $pages | append (index $pagesAndImages 0) }}
+        {{ $images = $images | append (index $pagesAndImages 1) }}
+    {{ else if .RegularPagesRecursive }}
+        {{ $pages = $pages | append . }}
+    {{ end }}
+{{ end }}
+
+{{ range where (where .RegularPages "Params.hidden" "!=" true) "Params.featured" "!=" true }}
+    {{ if .Params.project }}
+        {{ $pages = $pages | append . }}
+    {{ else }}
+        {{ $images = $images | append . }}
+    {{ end }}
+{{ end }}
+
+{{ return (slice $pages $images)}}

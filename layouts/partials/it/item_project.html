@@ -1,0 +1,36 @@
+{{ $style := "" }}
+
+{{ with .Params.width }}
+    {{ $style = add "grid-column: span " (string .)}}
+{{ end }}
+
+<article class="item item--project" style="{{ $style }}">
+    {{ $thumb := "" }}
+
+    {{ with .Params.thumb }}
+        {{ $thumb = . }}
+    {{ else with .Params.hero }}
+        {{ $thumb = . }}
+    {{ else with index .RegularPagesRecursive 0 }}
+        {{ $thumb = .Params.hero }}
+    {{ end }}
+
+    <a class="item__link item--project__link" href="{{ .RelPermalink }}">
+        {{ with $thumb }}
+            {{ $image := resources.Get . }}
+
+            {{ with $image }}
+                {{ $resized := partial "fn/ResizeSmart" (dict "image" . "length" 1500) }}
+                <img class="item__img item--project__img" loading="lazy" src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}">
+            {{ else }}
+                {{ errorf (add "Item: unable to find " .) }}
+            {{ end }}
+        {{ end }}
+
+        <div class="item__overlay">
+            {{ with .LinkTitle }}
+                <h3 class="item__title">{{ . }}</h3>
+            {{ end }}
+        </div>
+    </a>
+</article>

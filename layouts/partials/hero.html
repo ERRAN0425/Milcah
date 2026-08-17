@@ -1,0 +1,28 @@
+{{ with .Params.hero }}
+    {{ $classHero := "" }}
+    {{ $classTitle := "" }}
+
+    {{ if $.Params.herolarge }}
+        {{ $classHero = "hero--large" }}
+        {{ $classTitle = "hero__title--logo" }}
+    {{ end }}
+
+    <div class="hero {{ $classHero }}">
+        {{ $image := resources.Get . }}
+
+        {{ with $image }}
+            {{ $resized := partial "fn/ResizeSmart" (dict "image" . "length" 2000) }}
+            <img class="hero__img fadeload noselect" loading="lazy" onload="this.style.opacity=1" src="{{ $resized.RelPermalink }}" alt="{{ $.Title }}">
+        {{ else }}
+            {{ errorf (add "Hero: unable to find " .) }}
+        {{ end }}
+
+        <div class="hero__overlay">
+            {{ if $.Params.herolarge }}
+                <h1 class="hero__title {{ $classTitle }} inverted column">{{ $.Site.Title }}</h1>
+            {{ else }}
+                <h1 class="hero__title {{ $classTitle }} inverted column">{{ $.Title }}</h1>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

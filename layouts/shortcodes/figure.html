@@ -1,0 +1,11 @@
+{{ with resources.Get (.Get "src") }}
+    <figure>
+        {{ partial "single/image_figure" (dict
+            "src" .
+            "title" ($.Get "title")
+            "alt" ($.Get "alt")
+            "outline" ($.Get "outline")
+            "zoomable" ($.Get "zoomable")
+        ) }}
+    </figure>
+{{ end }}

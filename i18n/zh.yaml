@@ -1,0 +1,26 @@
+featured:
+  other: 精选作品
+pageNotFound:
+  other: 页面未找到
+ongoing:
+  other: 进行中
+sentenceSeparator:
+  other: "。"
+languageSwitcher:
+  other: 选择语言
+menuToggle:
+  other: 展开或收起导航菜单
+home:
+  other: 首页
+mail:
+  other: 邮箱
+linkedin:
+  other: 领英
+instagram:
+  other: Instagram
+comingSoonTitle:
+  other: 暂待开发
+comingSoonMessage:
+  other: 因密迦本人拒不配合，此处暂待后续开发，敬请期待
+close:
+  other: 关闭

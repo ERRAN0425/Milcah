@@ -1,0 +1,17 @@
+<div class="language-switcher {{ if and .Params.hero (or (ne .Kind "page") .Params.project) }}language-switcher--inverted{{ end }}">
+    <select
+        class="language-switcher__select"
+        aria-label="{{ i18n "languageSwitcher" }}"
+        data-language-switcher
+        data-testid="language-select">
+        {{ $currentLanguage := .Language.Lang }}
+        {{ range .AllTranslations }}
+            <option
+                value="{{ .RelPermalink }}"
+                lang="{{ .Language.LanguageCode }}"
+                {{ if eq .Language.Lang $currentLanguage }}selected{{ end }}>
+                {{ .Language.Params.languageLabel }}
+            </option>
+        {{ end }}
+    </select>
+</div>
