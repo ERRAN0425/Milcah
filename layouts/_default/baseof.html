@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {{ with .Params.summary }}<meta name="description" content="{{ . }}">{{ end }}
-        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="{{ "css/index.css" | relURL }}">
         <style>html, body { overflow-x: hidden; }</style>
 
         <!-- favicon -->
-        <link rel="icon" href="/images/favicon.svg">
+        <link rel="icon" href="{{ "images/favicon.svg" | relURL }}">
 
         <!-- google fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
